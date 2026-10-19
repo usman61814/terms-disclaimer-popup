@@ -1,0 +1,556 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Libre+Caslon+Display&display=swap');
+
+:root {
+    --e-global-color-e8f4397: #dbb47d;
+}
+
+/* --- Base Popup Styles (Shared by all popups) --- */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background-color: transparent;
+    color: #f7fafc;
+    margin: 0;
+    padding: clamp(30px, 5vw, 50px) clamp(20px, 5vw, 50px);
+    border-radius: 10px;
+    width: clamp(300px, calc(100vw - 60px), 800px);
+    position: relative;
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+    z-index: 1;
+}
+
+.popup-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(90deg, var(--e-global-color-e8f4397) 10%, #3E3E3E 80%);
+    opacity: 0.8;
+    border-radius: 10px;
+    z-index: -1;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #a37a51;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    background-color: #b3926c;
+}
+
+.popup-content h2 {
+    font-family: 'Libre Caslon Display', serif;
+    font-size: clamp(24px, 5vw, 40px);
+    color: #e1ba82;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.popup-content hr {
+    border: 0;
+    height: 1px;
+    background: #ffffff20;
+    margin-bottom: 25px;
+}
+
+.popup-content p {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(14px, 2.5vw, 18px);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.popup-content a {
+    color: #e1ba82;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --- Styles for the Main Popup --- */
+#my-popup .popup-content p {
+    padding: 0px 50px 0px 50px;
+}
+
+/* --- Service Selection --- */
+.service-select-heading {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+.report-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.report-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+.report-option:hover {
+    border-color: #c9a84c;
+    background-color: #fdf8ee;
+}
+
+.report-option input[type="radio"] {
+    accent-color: #c9a84c;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.report-option-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.report-level {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222 !important;
+}
+
+.report-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #222 !important;
+}
+
+.report-option:has(input:checked) {
+    border-color: #c9a84c;
+    background-color: #fdf8ee;
+}
+
+.report-option:has(input:checked) .report-level,
+.report-option:has(input:checked) .report-price {
+    color: #c9a84c !important;
+}
+
+/* --- Confirm Section --- */
+.confirm-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    margin-bottom: 30px;
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(14px, 2.5vw, 18px);
+    color: #ffffff;
+}
+
+.confirm-section input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+#my-popup .confirm-section label {
+    color: #ffffff !important;
+}
+
+/* --- Continue Button --- */
+.continue-btn {
+    background-image: linear-gradient(100deg, #dbb47d 10%, #c9a063 100%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 0;
+    width: 100%;
+    font-size: clamp(16px, 3vw, 20px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Jost', sans-serif;
+}
+
+.continue-btn:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.continue-btn:disabled {
+    background-image: none;
+    background-color: #5a677d;
+    cursor: not-allowed;
+}
+
+/* --- Scrollable Content --- */
+.scrollable-content {
+    height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+    text-align: left;
+    padding-right: 15px;
+}
+
+.scrollable-content h3 {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #e1ba82;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.scrollable-content p, .scrollable-content ul {
+    margin-bottom: 1em;
+}
+
+.scrollable-content ul {
+    padding-left: 20px;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #dbb47d, #b38b4d);
+    border-radius: 10px;
+}
+
+/* --- Footer Links --- */
+.footer-popup-links a,
+.footer-popup-links .footer-link-separator {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-popup-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-popup-links .footer-link-separator {
+    margin: 0 10px;
+}
+
+/* --- FAQ / Sample Reports Trigger Links --- */
+.open-sample-reports-link,
+.open-faq-link {
+    color: #e1ba82;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(14px, 2.5vw, 16px);
+    transition: color 0.3s ease;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.open-sample-reports-link:hover,
+.open-faq-link:hover {
+    color: #dbb47d;
+}
+
+/* --- Sample Reports Popup --- */
+.sample-reports-intro {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(14px, 2.5vw, 16px);
+    color: #f7fafc;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.sample-reports-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.sample-report-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(225, 186, 130, 0.3);
+    border-radius: 10px;
+    padding: 20px 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.sample-report-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(225, 186, 130, 0.5);
+}
+
+.sample-report-icon {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.sample-report-icon svg {
+    width: 40px;
+    height: 40px;
+    color: #e1ba82;
+}
+
+.pdf-label {
+    position: absolute;
+    bottom: -3px;
+    right: -8px;
+    background: linear-gradient(100deg, #dbb47d 10%, #c9a063 100%);
+    color: #1a1a2e;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.sample-report-card h3 {
+    font-family: 'Libre Caslon Display', serif;
+    font-size: clamp(16px, 2.5vw, 18px);
+    color: #e1ba82;
+    margin: 0 0 10px 0;
+}
+
+.sample-report-card p {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(12px, 2vw, 13px);
+    color: #f7fafc;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sample-report-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.sample-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    min-width: 80px;
+}
+
+.sample-btn-view {
+    background: transparent;
+    color: #e1ba82;
+    border: 2px solid #e1ba82;
+}
+
+.sample-btn-view:hover {
+    background: #e1ba82;
+    color: #1a1a2e;
+}
+
+/* --- FAQs tab content kabhi show na ho --- */
+li.tab-nav[data-tab="tab-7a35296"] .tab-content,
+.tab-content-list [data-tab-content="tab-7a35296"],
+.tab-content-list > div:last-child {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* --- Media Queries --- */
+@media screen and (min-width: 360px) and (max-width: 700px) {
+    .popup-content {
+        width: 400px;
+    }
+    .popup-content h2 {
+        font-size: 26px;
+        padding: 0px 30px 0px 30px;
+    }
+    .popup-content p,
+    .confirm-section,
+    .continue-btn {
+        font-size: 18px;
+        width: 100%;
+    }
+    #my-popup .popup-content p {
+        font-size: 16px;
+        padding: 20px 20px 0px 20px;
+    }
+    .close-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 30px;
+    }
+    .scrollable-content {
+        height: auto;
+        max-height: 45vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .scrollable-content::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1199px) {
+    .popup-content {
+        width: 500px;
+    }
+    .popup-content h2 {
+        font-size: 26px;
+    }
+    .confirm-section,
+    .continue-btn {
+        font-size: 18px;
+    }
+    #my-popup .popup-content p {
+        font-size: 18px;
+        padding: 20px 20px 0px 20px;
+    }
+    .close-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1969px) {
+    .popup-content {
+        width: 500px;
+        padding: 20px !important;
+    }
+    .popup-content h2 {
+        font-size: 26px;
+    }
+    #my-popup .popup-content p {
+        font-size: 16px;
+        padding: 0px 50px 0px 50px;
+    }
+    .continue-btn {
+        font-size: 16px;
+    }
+    .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 22px;
+    }
+}
+
+@media screen and (min-width: 1980px) {
+    .popup-content {
+        width: 800px;
+    }
+    .popup-content h2 {
+        font-size: 38px;
+    }
+    #my-popup .popup-content p {
+        font-size: 30px;
+        padding: 30px 50px 0px 50px;
+    }
+    .confirm-section {
+        font-size: 18px;
+        color: #ffffff !important;
+        align-items: flex-start;
+    }
+    .close-btn {
+        border-radius: 4px;
+        width: 30px;
+        height: 30px;
+        line-height: 25px;
+        text-align: center;
+        font-size: 30px;
+    }
+    .sample-reports-intro {
+        font-size: 20px;
+    }
+    .sample-report-card h3 {
+        font-size: 26px;
+    }
+    .sample-report-card p {
+        font-size: 18px;
+    }
+    .sample-btn {
+        font-size: 16px;
+        padding: 14px 28px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .sample-reports-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .sample-report-card {
+        padding: 25px 20px;
+    }
+    .sample-report-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .sample-btn {
+        width: 100%;
+    }
+}
